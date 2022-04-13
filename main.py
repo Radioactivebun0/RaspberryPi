@@ -12,10 +12,10 @@ def setup():
     GPIO.setup(button, GPIO.IN)
 
 def alert(al):
-    if al == True and time.time() - lastTime > 60:
+    if al == "True" and time.time() - lastTime > 60:
         print("Alert!")
     else:
-        if al == True:
+        if al == "True":
             print("Alert already sent per lastTime")
         else:
             print("No alert at all")
@@ -31,6 +31,8 @@ def loop():
             print("Alert set to False")
         
         time.sleep(5)
+
+        alert(str(alert))
 
         """
         if GPIO.input(button) == GPIO.HIGH:
