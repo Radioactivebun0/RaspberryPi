@@ -5,14 +5,16 @@ import time
 button = 4
 
 global lastTime
-lastTime = time.time()
+lastTime = 0
 
 def setup():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(button, GPIO.IN)
 
 def alert(al):
+    global lastTime
     if al == "True" and time.time() - lastTime > 60:
+        lastTime = time.time()
         print("Alert!")
     else:
         if al == "True":
@@ -21,18 +23,18 @@ def alert(al):
             print("No alert at all")
 
 def loop():
-    alert = False
+    alertboo = False
     while True:
         if GPIO.input(button) == GPIO.HIGH:
-            alert = True
+            alertboo = True
             print("Alert set to True")
         else:
-            alert = False
+            alertboo = False
             print("Alert set to False")
         
         time.sleep(5)
 
-        alert(str(alert))
+        alert(str(alertboo))
 
         """
         if GPIO.input(button) == GPIO.HIGH:
