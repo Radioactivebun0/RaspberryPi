@@ -10,11 +10,7 @@ def setup():
 
 def loop():
     while True:
-        if GPIO.input(button) == GPIO.HIGH:
-            print("Button pressed")
-        else:
-            print("No button pressed")
-        time.sleep(0.2)
+        print(GPIO.input(button))
 
 def destroy():
     GPIO.cleanup()
