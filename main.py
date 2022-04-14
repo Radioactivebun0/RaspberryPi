@@ -4,14 +4,14 @@ import time
 import smtplib
 from email.mime.text import MIMEText
 
-button = 4
+Sensor1 = [21, "Sensor1"]
 
 global lastTime
 lastTime = 0
 
 def setup():
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(button, GPIO.IN)
+    GPIO.setup(Sensor1[0], GPIO.IN)
 
 def send_email(too, sub="test", mm="test"):
     SMTP_SERVER = "smtp.mail.yahoo.com"
@@ -32,30 +32,24 @@ def send_email(too, sub="test", mm="test"):
     mail.sendmail(EMAIL_FROM, EMAIL_TO, msg.as_string())
     mail.quit()
 
-def alert(al):
+def alert(sensor):
     global lastTime
-    if al == "True" and time.time() - lastTime > 60:
+    if time.time() - lastTime > 60:
         lastTime = time.time()
-        send_email("tyleer253@gmail.com", "Leak Detected", "Leak Detected")
+        print("Alerting")
+        send_email("tyleer253@gmail.com", "Leak Detected", f"Leak Detected on sensor {sensor[1]}")
     else:
-        if al == "True":
-            print("Alert already sent per lastTime")
-        else:
-            print("No alert at all")
+        print("Alert already sent per lastTime")
 
 def loop():
-    alertboo = False
     while True:
-        if GPIO.input(button) == GPIO.HIGH:
-            alertboo = True
-            print("Alert set to True")
+        if GPIO.input(Sensor1[0]) == GPIO.HIGH:
+            print("Alerting")
+            alert(Sensor1)
         else:
-            alertboo = False
             print("Alert set to False")
-        
         time.sleep(5)
-
-        alert(str(alertboo))
+        
 
 def destroy():
     GPIO.cleanup()
