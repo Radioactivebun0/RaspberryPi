@@ -169,7 +169,7 @@ def loop():
         else:
             print("No leak detected on Sensor17")
         
-        time.sleep(5)
+        time.sleep(0.5)
         
 
 def destroy():
