@@ -29,6 +29,22 @@ lastTime = 0
 def setup():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(Sensor1[0], GPIO.IN)
+    GPIO.setup(Sensor2[0], GPIO.IN)
+    GPIO.setup(Sensor3[0], GPIO.IN)
+    GPIO.setup(Sensor4[0], GPIO.IN)
+    GPIO.setup(Sensor5[0], GPIO.IN)
+    GPIO.setup(Sensor6[0], GPIO.IN)
+    GPIO.setup(Sensor7[0], GPIO.IN)
+    GPIO.setup(Sensor8[0], GPIO.IN)
+    GPIO.setup(Sensor9[0], GPIO.IN)
+    GPIO.setup(Sensor10[0], GPIO.IN)
+    GPIO.setup(Sensor11[0], GPIO.IN)
+    GPIO.setup(Sensor12[0], GPIO.IN)
+    GPIO.setup(Sensor13[0], GPIO.IN)
+    GPIO.setup(Sensor14[0], GPIO.IN)
+    GPIO.setup(Sensor15[0], GPIO.IN)
+    GPIO.setup(Sensor16[0], GPIO.IN)
+    GPIO.setup(Sensor17[0], GPIO.IN)
 
 def send_email(too, sub="test", mm="test"):
     SMTP_SERVER = "smtp.mail.yahoo.com"
