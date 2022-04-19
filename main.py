@@ -7,23 +7,23 @@ import time
 import smtplib
 from email.mime.text import MIMEText
 
-Sensor1 = [4, "Sensor1", False]
-Sensor2 = [17, "Sensor2", False]
-Sensor3 = [27, "Sensor3", False]
-Sensor4 = [22, "Sensor4", False]
-Sensor5 = [5, "Sensor5", False]
-Sensor6 = [6, "Sensor6", False]
-Sensor7 = [13, "Sensor7", False]
-Sensor8 = [19, "Sensor8", False]
-Sensor9 = [26, "Sensor9", False]
-Sensor10 = [18, "Sensor10", False]
-Sensor11 = [23, "Sensor11", False]
-Sensor12 = [24, "Sensor12", False]
-Sensor13 = [25, "Sensor13", False]
-Sensor14 = [12, "Sensor14", False]
-Sensor15 = [16, "Sensor15", False]
-Sensor16 = [20, "Sensor16", False]
-Sensor17 = [21, "Sensor17", False]
+Sensor1 = [4, "Sensor1", False, 0]
+Sensor2 = [17, "Sensor2", False, 0]
+Sensor3 = [27, "Sensor3", False, 0]
+Sensor4 = [22, "Sensor4", False, 0]
+Sensor5 = [5, "Sensor5", False, 0]
+Sensor6 = [6, "Sensor6", False, 0]
+Sensor7 = [13, "Sensor7", False, 0]
+Sensor8 = [19, "Sensor8", False, 0]
+Sensor9 = [26, "Sensor9", False, 0]
+Sensor10 = [18, "Sensor10", False, 0]
+Sensor11 = [23, "Sensor11", False, 0]
+Sensor12 = [24, "Sensor12", False, 0]
+Sensor13 = [25, "Sensor13", False, 0]
+Sensor14 = [12, "Sensor14", False, 0]
+Sensor15 = [16, "Sensor15", False, 0]
+Sensor16 = [20, "Sensor16", False, 0]
+Sensor17 = [21, "Sensor17", False, 0]
 
 global lastTime
 lastTime = 0
@@ -67,14 +67,12 @@ def send_email(too, sub="test", mm="test"):
     mail.sendmail(EMAIL_FROM, EMAIL_TO, msg.as_string())
     mail.quit()
 
-def alert(sensor, state):
-    global lastTime
-    if time.time() - lastTime > 60 and sensor[2] == False:
-        lastTime = time.time()
+def alert(sensor):
+    if time.time() - sensor[3] > 60 and sensor[2] == False:
         print("Sending email")
         send_email("tyleer253@gmail.com", "Leak Detected", f"Leak Detected on sensor {sensor[1]}")
-        return True
-    return False
+        return True, time.time()
+    return False, sensor[3]
     
     """
     elif sensor[2] == True and time.time() - lastTime > 60:
@@ -130,87 +128,87 @@ def loop():
     while True:
         if GPIO.input(Sensor1[0]) == GPIO.HIGH:
             print("Alerting on Sensor1")
-            Sensor1[2] = alert(Sensor1)
+            Sensor1[2], Sensor1[3] = alert(Sensor1)
         #else:
             #print("No leak detected on Sensor1")
         if GPIO.input(Sensor2[0]) == GPIO.HIGH:
             print("Alerting on Sensor2")
-            Sensor2[2] = alert(Sensor2)
+            Sensor2[2], Sensor2[3] = alert(Sensor2)
         #else:
          #   print("No leak detected on Sensor2")
         if GPIO.input(Sensor3[0]) == GPIO.HIGH:
             print("Alerting on Sensor3")
-            Sensor3[2] = alert(Sensor3)
+            Sensor3[2], Sensor3[3] = alert(Sensor3)
         #else:
          #   print("No leak detected on Sensor3")
         if GPIO.input(Sensor4[0]) == GPIO.HIGH:
             print("Alerting on Sensor4")
-            Sensor4[2] = alert(Sensor4)
+            Sensor4[2], Sensor4[3] = alert(Sensor4)
         #else:
          #   print("No leak detected on Sensor4")
         if GPIO.input(Sensor5[0]) == GPIO.HIGH:
             print("Alerting on Sensor5")
-            Sensor5[2] = alert(Sensor5)
+            Sensor5[2], Sensor5[3] = alert(Sensor5)
         #else:
          #   print("No leak detected on Sensor5")
         if GPIO.input(Sensor6[0]) == GPIO.HIGH:
             print("Alerting on Sensor6")
-            Sensor6[2] = alert(Sensor6)
+            Sensor6[2], Sensor6[3] = alert(Sensor6)
         #else:
          #   print("No leak detected on Sensor6")
         if GPIO.input(Sensor7[0]) == GPIO.HIGH:
             print("Alerting on Sensor7")
-            Sensor7[2] = alert(Sensor7)
+            Sensor7[2], Sensor7[3] = alert(Sensor7)
         #else:
          #   print("No leak detected on Sensor7")
         if GPIO.input(Sensor8[0]) == GPIO.HIGH:
             print("Alerting on Sensor8")
-            Sensor8[2] = alert(Sensor8)
+            Sensor8[2], Sensor8[3] = alert(Sensor8)
         #else:
          #   print("No leak detected on Sensor8")
         if GPIO.input(Sensor9[0]) == GPIO.HIGH:
             print("Alerting on Sensor9")
-            Sensor9[2] = alert(Sensor9)
+            Sensor9[2], Sensor9[3] = alert(Sensor9)
         #else:
          #   print("No leak detected on Sensor9")
         if GPIO.input(Sensor10[0]) == GPIO.HIGH:
             print("Alerting on Sensor10")
-            Sensor10[2] = alert(Sensor10)
+            Sensor10[2], Sensor10[3] = alert(Sensor10)
         #else:
          #   print("No leak detected on Sensor10")
         if GPIO.input(Sensor11[0]) == GPIO.HIGH:
             print("Alerting on Sensor11")
-            Sensor11[2] = alert(Sensor11)
+            Sensor11[2], Sensor11[3] = alert(Sensor11)
         #else:
          #   print("No leak detected on Sensor11")
         if GPIO.input(Sensor12[0]) == GPIO.HIGH:
             print("Alerting on Sensor12")
-            Sensor12[2] = alert(Sensor12)
+            Sensor12[2], Sensor12[3] = alert(Sensor12)
         #else:
          #   print("No leak detected on Sensor12")
         if GPIO.input(Sensor13[0]) == GPIO.HIGH:
             print("Alerting on Sensor13")
-            Sensor13[2] = alert(Sensor13)
+            Sensor13[2], Sensor13[3] = alert(Sensor13)
         #else:
          #   print("No leak detected on Sensor13")
         if GPIO.input(Sensor14[0]) == GPIO.HIGH:
             print("Alerting on Sensor14")
-            Sensor14[2] = alert(Sensor14)
+            Sensor14[2], Sensor14[3] = alert(Sensor14)
         #else:
          #   print("No leak detected on Sensor14")
         if GPIO.input(Sensor15[0]) == GPIO.HIGH:
             print("Alerting on Sensor15")
-            Sensor15[2] = alert(Sensor15)
+            Sensor15[2], Sensor15[3] = alert(Sensor15)
         #else:
          #   print("No leak detected on Sensor15")
         if GPIO.input(Sensor16[0]) == GPIO.HIGH:
             print("Alerting on Sensor16")
-            Sensor16[2] = alert(Sensor16)
+            Sensor16[2], Sensor16[3] = alert(Sensor16)
         #else:
          #   print("No leak detected on Sensor16")
         if GPIO.input(Sensor17[0]) == GPIO.HIGH:
             print("Alerting on Sensor17")
-            Sensor17[2] = alert(Sensor17)
+            Sensor17[2], Sensor17[3] = alert(Sensor17)
         #else:
          #   print("No leak detected on Sensor17")
 
